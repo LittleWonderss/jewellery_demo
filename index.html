@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noor Jewels | Elegant Artificial Jewellery</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: {
+                            DEFAULT: '#FAFAF7',
+                            dark: '#F3EFEA',
+                        },
+                        gold: {
+                            light: '#E6D3A3',
+                            DEFAULT: '#C5A059',
+                            dark: '#A6823D',
+                        },
+                        ink: {
+                            DEFAULT: '#3A3532',
+                            light: '#5C5551',
+                        },
+                        blush: '#F9F1F0'
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['Montserrat', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 40px -10px rgba(197, 160, 89, 0.1)',
+                        'glow': '0 0 15px rgba(197, 160, 89, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles & Utilities */
+        body {
+            background-color: #FAFAF7;
+            color: #3A3532;
+        }
+
+        /* Hide Scrollbar for horizontal scrolling */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Smooth Fade In Animation */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Shimmer Effect for Gold elements */
+        .shimmer {
+            position: relative;
+            overflow: hidden;
+        }
+        .shimmer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transform: skewX(-20deg);
+            animation: shimmerEffect 3s infinite;
+        }
+        @keyframes shimmerEffect {
+            0% { left: -100%; }
+            20% { left: 200%; }
+            100% { left: 200%; }
+        }
+
+        /* Image Hover Zoom */
+        .img-zoom-container {
+            overflow: hidden;
+        }
+        .img-zoom-container img {
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .img-zoom-container:hover img {
+            transform: scale(1.08);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased flex flex-col min-h-screen">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-4 px-6 md:px-12 bg-cream/90 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-ink" aria-label="Menu">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+
+            <!-- Logo -->
+            <a href="#" class="font-serif text-2xl md:text-3xl font-semibold tracking-wide text-ink mx-auto md:mx-0">
+                NOOR <span class="text-gold italic">Jewels</span>
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="hidden md:flex items-center space-x-8 text-sm font-medium tracking-widest uppercase">
+                <a href="#collections" class="hover:text-gold transition-colors">Collections</a>
+                <a href="#shop" class="hover:text-gold transition-colors">Shop</a>
+                <a href="#reviews" class="hover:text-gold transition-colors">Reviews</a>
+            </div>
+
+            <!-- Icons -->
+            <div class="flex items-center space-x-4">
+                <a href="https://wa.me/919876543210" target="_blank" class="text-ink hover:text-gold transition-colors" aria-label="WhatsApp">
+                    <svg class="w-5 h-5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 0C5.385 0 0 5.385 0 12.031c0 2.115.55 4.17 1.595 5.986L.012 23.988l6.106-1.6c1.761.944 3.738 1.442 5.913 1.442 6.646 0 12.031-5.385 12.031-12.031S18.677 0 12.031 0zm0 21.674c-1.782 0-3.526-.479-5.056-1.386l-.362-.214-3.753.984.998-3.66-.235-.374a9.86 9.86 0 01-1.508-5.181c0-5.46 4.442-9.902 9.916-9.902 2.646 0 5.134 1.03 7.004 2.9A9.845 9.845 0 0121.947 12.03c0 5.46-4.442 9.902-9.916 9.902zm5.438-7.417c-.298-.15-1.766-.872-2.038-.973-.273-.101-.472-.15-.67.15-.199.299-.768.973-.941 1.173-.173.2-.347.225-.645.075-2.003-.974-3.411-2.222-4.229-3.645-.174-.3-.018-.463.13-.611.134-.134.298-.348.447-.522.15-.174.199-.299.298-.498.101-.2.05-.374-.025-.523-.075-.15-.67-1.618-.918-2.215-.242-.58-.488-.501-.67-.51-.173-.008-.372-.008-.57-.008s-.521.075-.794.374c-.273.299-1.042 1.021-1.042 2.49 0 1.47 1.067 2.891 1.216 3.09.149.2 2.106 3.214 5.105 4.511.713.308 1.268.492 1.701.629.715.227 1.365.195 1.88.118.577-.086 1.766-.722 2.014-1.421.248-.699.248-1.298.173-1.421-.074-.125-.272-.2-.57-.35z"/></svg>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 1. Hero Section -->
+    <header class="relative w-full h-[85vh] md:h-screen flex items-center justify-center overflow-hidden bg-cream-dark">
+        <!-- Background Image -->
+        <div class="absolute inset-0 w-full h-full">
+            <img src="https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?q=80&w=2000&auto=format&fit=crop" alt="Elegant Jewellery Model" class="w-full h-full object-cover object-center opacity-80" />
+            <!-- Soft Gradient Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-cream via-cream/20 to-transparent"></div>
+        </div>
+
+        <!-- Content -->
+        <div class="relative z-10 text-center px-6 max-w-3xl mx-auto fade-up visible">
+            <span class="block text-gold font-sans text-xs md:text-sm tracking-[0.3em] uppercase mb-4">The Bridal Edit 2026</span>
+            <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl text-ink mb-6 leading-tight">
+                Elegance in <br>Every <span class="italic text-gold">Detail</span>
+            </h1>
+            <p class="text-ink-light text-base md:text-lg mb-10 font-light max-w-lg mx-auto">
+                Discover our luxurious collection of artificial jewellery, crafted perfectly for every occasion.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#shop" class="bg-ink text-white px-8 py-3.5 rounded-full uppercase tracking-wider text-xs font-medium hover:bg-gold transition-colors duration-300 w-full sm:w-auto">Shop Now</a>
+                <a href="#collections" class="bg-transparent border border-ink text-ink px-8 py-3.5 rounded-full uppercase tracking-wider text-xs font-medium hover:bg-ink hover:text-white transition-colors duration-300 w-full sm:w-auto">Explore Collection</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 3. Categories Section (Moved up for better flow) -->
+    <section id="collections" class="py-16 md:py-24 bg-cream">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <h2 class="font-serif text-3xl md:text-4xl text-center text-ink mb-12 fade-up">Shop by Category</h2>
+            
+            <!-- Horizontal scroll on mobile, grid on desktop -->
+            <div class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-6 md:grid md:grid-cols-4 pb-8 md:pb-0 fade-up" style="transition-delay: 100ms;">
+                
+                <!-- Category 1 -->
+                <a href="#shop" class="snap-start shrink-0 w-64 md:w-auto group cursor-pointer block text-center">
+                    <div class="w-32 h-32 md:w-48 md:h-48 mx-auto rounded-full overflow-hidden mb-4 shadow-soft border border-gold/20 img-zoom-container">
+                        <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=600&auto=format&fit=crop" alt="Earrings" class="w-full h-full object-cover" loading="lazy">
+                    </div>
+                    <h3 class="font-serif text-xl text-ink group-hover:text-gold transition-colors">Earrings</h3>
+                </a>
+
+                <!-- Category 2 -->
+                <a href="#shop" class="snap-start shrink-0 w-64 md:w-auto group cursor-pointer block text-center">
+                    <div class="w-32 h-32 md:w-48 md:h-48 mx-auto rounded-full overflow-hidden mb-4 shadow-soft border border-gold/20 img-zoom-container">
+                        <img src="https://images.unsplash.com/photo-1599643478524-fb66f7eee5b5?q=80&w=600&auto=format&fit=crop" alt="Necklaces" class="w-full h-full object-cover" loading="lazy">
+                    </div>
+                    <h3 class="font-serif text-xl text-ink group-hover:text-gold transition-colors">Necklaces</h3>
+                </a>
+
+                <!-- Category 3 -->
+                <a href="#shop" class="snap-start shrink-0 w-64 md:w-auto group cursor-pointer block text-center">
+                    <div class="w-32 h-32 md:w-48 md:h-48 mx-auto rounded-full overflow-hidden mb-4 shadow-soft border border-gold/20 img-zoom-container">
+                        <img src="https://images.unsplash.com/photo-1596944924616-7b38e7cfac36?q=80&w=600&auto=format&fit=crop" alt="Bangles" class="w-full h-full object-cover" loading="lazy">
+                    </div>
+                    <h3 class="font-serif text-xl text-ink group-hover:text-gold transition-colors">Bangles</h3>
+                </a>
+
+                <!-- Category 4 -->
+                <a href="#shop" class="snap-start shrink-0 w-64 md:w-auto group cursor-pointer block text-center">
+                    <div class="w-32 h-32 md:w-48 md:h-48 mx-auto rounded-full overflow-hidden mb-4 shadow-soft border border-gold/20 img-zoom-container">
+                        <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=600&auto=format&fit=crop" alt="Bridal Sets" class="w-full h-full object-cover" loading="lazy">
+                    </div>
+                    <h3 class="font-serif text-xl text-ink group-hover:text-gold transition-colors">Bridal Sets</h3>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Featured Collection -->
+    <section class="py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="flex justify-between items-end mb-10 fade-up">
+                <div>
+                    <h2 class="font-serif text-3xl md:text-5xl text-ink mb-2">Featured Pieces</h2>
+                    <p class="text-ink-light text-sm md:text-base font-light">Handpicked selections for you.</p>
+                </div>
+                <a href="#shop" class="hidden md:inline-block text-gold border-b border-gold pb-1 text-sm uppercase tracking-wider hover:text-ink hover:border-ink transition-colors">View All</a>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+                <!-- Product 1 -->
+                <div class="group fade-up cursor-pointer">
+                    <div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden mb-4 bg-cream-dark img-zoom-container">
+                        <span class="absolute top-3 left-3 z-10 bg-white/90 text-ink text-[10px] md:text-xs px-2 py-1 uppercase tracking-widest rounded-sm">Bestseller</span>
+                        <img src="https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?q=80&w=800&auto=format&fit=crop" alt="Gold Plated Necklace Set" class="w-full h-full object-cover" loading="lazy">
+                        <!-- Quick Add Overlay (Desktop) -->
+                        <div class="absolute inset-0 bg-ink/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <button onclick="orderOnWhatsApp('Gold Plated Layered Necklace')" class="bg-white text-ink px-6 py-2 rounded-full text-sm font-medium hover:bg-gold hover:text-white transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300">Order via WhatsApp</button>
+                        </div>
+                    </div>
+                    <div class="text-center md:text-left">
+                        <h3 class="font-serif text-lg md:text-xl text-ink mb-1 truncate">Gold Plated Layered Necklace</h3>
+                        <p class="text-gold font-medium">₹2,499</p>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="group fade-up" style="transition-delay: 100ms;">
+                    <div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden mb-4 bg-cream-dark img-zoom-container">
+                        <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=800&auto=format&fit=crop" alt="Kundan Drop Earrings" class="w-full h-full object-cover" loading="lazy">
+                        <div class="absolute inset-0 bg-ink/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <button onclick="orderOnWhatsApp('Kundan Drop Earrings')" class="bg-white text-ink px-6 py-2 rounded-full text-sm font-medium hover:bg-gold hover:text-white transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300">Order via WhatsApp</button>
+                        </div>
+                    </div>
+                    <div class="text-center md:text-left">
+                        <h3 class="font-serif text-lg md:text-xl text-ink mb-1 truncate">Kundan Drop Earrings</h3>
+                        <p class="text-gold font-medium">₹1,299</p>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="group fade-up" style="transition-delay: 200ms;">
+                    <div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden mb-4 bg-cream-dark img-zoom-container">
+                        <span class="absolute top-3 left-3 z-10 bg-gold text-white text-[10px] md:text-xs px-2 py-1 uppercase tracking-widest rounded-sm shimmer">New Arrival</span>
+                        <img src="https://images.unsplash.com/photo-1630019852942-f89202989a59?q=80&w=800&auto=format&fit=crop" alt="Statement Diamond Ring" class="w-full h-full object-cover" loading="lazy">
+                        <div class="absolute inset-0 bg-ink/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <button onclick="orderOnWhatsApp('Statement AD Ring')" class="bg-white text-ink px-6 py-2 rounded-full text-sm font-medium hover:bg-gold hover:text-white transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300">Order via WhatsApp</button>
+                        </div>
+                    </div>
+                    <div class="text-center md:text-left">
+                        <h3 class="font-serif text-lg md:text-xl text-ink mb-1 truncate">Statement AD Ring</h3>
+                        <p class="text-gold font-medium">₹899</p>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="group fade-up" style="transition-delay: 300ms;">
+                    <div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden mb-4 bg-cream-dark img-zoom-container">
+                        <img src="https://images.unsplash.com/photo-1543294001-f7cd5d7fb516?q=80&w=800&auto=format&fit=crop" alt="Classic Gold Chain" class="w-full h-full object-cover" loading="lazy">
+                        <div class="absolute inset-0 bg-ink/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <button onclick="orderOnWhatsApp('Classic Minimalist Chain')" class="bg-white text-ink px-6 py-2 rounded-full text-sm font-medium hover:bg-gold hover:text-white transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300">Order via WhatsApp</button>
+                        </div>
+                    </div>
+                    <div class="text-center md:text-left">
+                        <h3 class="font-serif text-lg md:text-xl text-ink mb-1 truncate">Classic Minimalist Chain</h3>
+                        <p class="text-gold font-medium">₹1,150</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-center md:hidden">
+                <a href="#shop" class="inline-block text-gold border-b border-gold pb-1 text-sm uppercase tracking-wider">View All</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. WhatsApp Banner Section (Conversion) -->
+    <section class="py-16 bg-ink text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <img src="https://images.unsplash.com/photo-1599643477877-530eb83abc8e?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover" alt="Background Texture">
+        </div>
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10 fade-up">
+            <h2 class="font-serif text-3xl md:text-5xl mb-4 text-cream">Fall in love with a piece?</h2>
+            <p class="font-light text-cream-dark/80 mb-8 max-w-lg mx-auto">Skip the cart. Send us a screenshot or the product name directly on WhatsApp, and we'll handle the rest. Fast, secure, and personal.</p>
+            <button onclick="orderOnWhatsApp('General Inquiry')" class="bg-gold hover:bg-gold-dark text-white px-8 py-4 rounded-full uppercase tracking-widest text-sm font-medium transition-colors shadow-glow flex items-center justify-center mx-auto space-x-2 shimmer">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 0C5.385 0 0 5.385 0 12.031c0 2.115.55 4.17 1.595 5.986L.012 23.988l6.106-1.6c1.761.944 3.738 1.442 5.913 1.442 6.646 0 12.031-5.385 12.031-12.031S18.677 0 12.031 0zm0 21.674c-1.782 0-3.526-.479-5.056-1.386l-.362-.214-3.753.984.998-3.66-.235-.374a9.86 9.86 0 01-1.508-5.181c0-5.46 4.442-9.902 9.916-9.902 2.646 0 5.134 1.03 7.004 2.9A9.845 9.845 0 0121.947 12.03c0 5.46-4.442 9.902-9.916 9.902zm5.438-7.417c-.298-.15-1.766-.872-2.038-.973-.273-.101-.472-.15-.67.15-.199.299-.768.973-.941 1.173-.173.2-.347.225-.645.075-2.003-.974-3.411-2.222-4.229-3.645-.174-.3-.018-.463.13-.611.134-.134.298-.348.447-.522.15-.174.199-.299.298-.498.101-.2.05-.374-.025-.523-.075-.15-.67-1.618-.918-2.215-.242-.58-.488-.501-.67-.51-.173-.008-.372-.008-.57-.008s-.521.075-.794.374c-.273.299-1.042 1.021-1.042 2.49 0 1.47 1.067 2.891 1.216 3.09.149.2 2.106 3.214 5.105 4.511.713.308 1.268.492 1.701.629.715.227 1.365.195 1.88.118.577-.086 1.766-.722 2.014-1.421.248-.699.248-1.298.173-1.421-.074-.125-.272-.2-.57-.35z"/></svg>
+                <span>Order Now on WhatsApp</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- 4. Product Showcase -->
+    <section id="shop" class="py-16 md:py-24 bg-cream">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <h2 class="font-serif text-3xl md:text-5xl text-center text-ink mb-12 fade-up">Latest Arrivals</h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
+                <!-- Generative repeating pattern for showcase using slightly different unsplash parameters -->
+                
+                <div class="group fade-up">
+                    <div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden mb-4 img-zoom-container">
+                        <img src="https://images.unsplash.com/photo-1599643477877-530eb83abc8e?q=80&w=600&auto=format&fit=crop" alt="Bridal Choker Set" class="w-full h-full object-cover" loading="lazy">
+                    </div>
+                    <div class="text-center">
+                        <h3 class="font-serif text-sm md:text-lg text-ink mb-1 truncate">Polki Bridal Choker Set</h3>
+                        <p class="text-gold font-medium text-sm">₹4,999</p>
+                        <button onclick="orderOnWhatsApp('Polki Bridal Choker Set')" class="mt-2 text-xs uppercase tracking-widest border-b border-ink pb-0.5 hover:text-gold hover:border-gold transition-colors">Order via WA</button>
+                    </div>
+                </div>
+
+                <div class="group fade-up" style="transition-delay: 100ms;">
+                    <div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden mb-4 img-zoom-container">
+                        <span class="absolute top-3 right-3 z-10 bg-blush text-ink text-[10px] md:text-xs px-2 py-1 uppercase tracking-widest rounded-sm">Trending</span>
+                        <img src="https://images.unsplash.com/photo-1535632787350-4e68ef0ac584?q=80&w=600&auto=format&fit=crop" alt="Rose Gold Jhumkas" class="w-full h-full object-cover" loading="lazy">
+                    </div>
+                    <div class="text-center">
+                        <h3 class="font-serif text-sm md:text-lg text-ink mb-1 truncate">Rose Gold Jhumkas</h3>
+                        <p class="text-gold font-medium text-sm">₹899</p>
+                        <button onclick="orderOnWhatsApp('Rose Gold Jhumkas')" class="mt-2 text-xs uppercase tracking-widest border-b border-ink pb-0.5 hover:text-gold hover:border-gold transition-colors">Order via WA</button>
+                    </div>
+                </div>
+
+                <div class="group fade-up" style="transition-delay: 200ms;">
+                    <div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden mb-4 img-zoom-container">
+                        <img src="https://images.unsplash.com/photo-1629224316810-9d8805b95e76?q=80&w=600&auto=format&fit=crop" alt="Pearl Drop Necklace" class="w-full h-full object-cover" loading="lazy">
+                    </div>
+                    <div class="text-center">
+                        <h3 class="font-serif text-sm md:text-lg text-ink mb-1 truncate">Pearl Drop Necklace</h3>
+                        <p class="text-gold font-medium text-sm">₹1,450</p>
+                        <button onclick="orderOnWhatsApp('Pearl Drop Necklace')" class="mt-2 text-xs uppercase tracking-widest border-b border-ink pb-0.5 hover:text-gold hover:border-gold transition-colors">Order via WA</button>
+                    </div>
+                </div>
+
+                <div class="group fade-up" style="transition-delay: 300ms;">
+                    <div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden mb-4 img-zoom-container">
+                        <img src="https://images.unsplash.com/photo-1573408301145-b98c46544405?q=80&w=600&auto=format&fit=crop" alt="Emerald Studs" class="w-full h-full object-cover" loading="lazy">
+                    </div>
+                    <div class="text-center">
+                        <h3 class="font-serif text-sm md:text-lg text-ink mb-1 truncate">Emerald AD Studs</h3>
+                        <p class="text-gold font-medium text-sm">₹650</p>
+                        <button onclick="orderOnWhatsApp('Emerald AD Studs')" class="mt-2 text-xs uppercase tracking-widest border-b border-ink pb-0.5 hover:text-gold hover:border-gold transition-colors">Order via WA</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center fade-up">
+                <button class="bg-transparent border border-ink text-ink px-10 py-3 rounded-full uppercase tracking-widest text-sm font-medium hover:bg-ink hover:text-white transition-colors duration-300">Load More</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Testimonials / Reviews -->
+    <section id="reviews" class="py-16 md:py-24 bg-blush">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <h2 class="font-serif text-3xl md:text-5xl text-center text-ink mb-12 fade-up">What They Say</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                <!-- Review 1 -->
+                <div class="bg-white p-8 rounded-2xl shadow-soft text-center fade-up">
+                    <div class="flex justify-center text-gold mb-4">
+                        ★★★★★
+                    </div>
+                    <p class="text-ink-light font-light italic mb-6">"Beautiful quality, looks absolutely premium 😍 Wore it to my brother's wedding and everyone asked about it!"</p>
+                    <p class="font-serif text-lg font-medium text-ink">— Sara</p>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="bg-white p-8 rounded-2xl shadow-soft text-center fade-up" style="transition-delay: 100ms;">
+                    <div class="flex justify-center text-gold mb-4">
+                        ★★★★★
+                    </div>
+                    <p class="text-ink-light font-light italic mb-6">"Exactly like the photos! The finish is flawless, doesn't look artificial at all. Highly recommend this brand."</p>
+                    <p class="font-serif text-lg font-medium text-ink">— Rohina</p>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="bg-white p-8 rounded-2xl shadow-soft text-center fade-up" style="transition-delay: 200ms;">
+                    <div class="flex justify-center text-gold mb-4">
+                        ★★★★★
+                    </div>
+                    <p class="text-ink-light font-light italic mb-6">"Got so many compliments 🔥 Delivery was super fast via WhatsApp. Will definitely order again."</p>
+                    <p class="font-serif text-lg font-medium text-ink">— Arpit</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Instagram Gallery Section -->
+    <section class="py-16 bg-cream">
+        <div class="max-w-full mx-auto px-4">
+            <div class="text-center mb-10 fade-up">
+                <h2 class="font-serif text-2xl md:text-3xl text-ink mb-2">@NoorJewels</h2>
+                <p class="text-ink-light text-sm font-light">Tag us to be featured</p>
+            </div>
+
+            <!-- Seamless Grid -->
+            <div class="grid grid-cols-3 md:grid-cols-6 gap-2 md:gap-4 fade-up">
+                <div class="aspect-square overflow-hidden group">
+                    <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=400&auto=format&fit=crop" alt="Insta 1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy">
+                </div>
+                <div class="aspect-square overflow-hidden group">
+                    <img src="https://images.unsplash.com/photo-1599643478524-fb66f7eee5b5?q=80&w=400&auto=format&fit=crop" alt="Insta 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy">
+                </div>
+                <div class="aspect-square overflow-hidden group">
+                    <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=400&auto=format&fit=crop" alt="Insta 3" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy">
+                </div>
+                <div class="aspect-square overflow-hidden group hidden md:block">
+                    <img src="https://images.unsplash.com/photo-1596944924616-7b38e7cfac36?q=80&w=400&auto=format&fit=crop" alt="Insta 4" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy">
+                </div>
+                <div class="aspect-square overflow-hidden group hidden md:block">
+                    <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=400&auto=format&fit=crop" alt="Insta 5" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy">
+                </div>
+                <div class="aspect-square overflow-hidden group hidden md:block">
+                    <img src="https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?q=80&w=400&auto=format&fit=crop" alt="Insta 6" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. Footer -->
+    <footer class="bg-[#2D2A27] text-cream-dark py-16 mt-auto">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-4 gap-10">
+            
+            <!-- Brand -->
+            <div class="col-span-1 md:col-span-2">
+                <a href="#" class="font-serif text-3xl font-semibold tracking-wide text-white mb-6 block">
+                    NOOR <span class="text-gold italic">Jewels</span>
+                </a>
+                <p class="text-cream-dark/60 font-light text-sm max-w-sm mb-6 leading-relaxed">
+                    Elevating your everyday elegance with premium artificial jewellery. Carefully curated, luxuriously presented.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-cream-dark/60 hover:text-gold transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm3.98-10.822a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.88z"/></svg>
+                    </a>
+                    <a href="https://wa.me/919876543210" class="text-cream-dark/60 hover:text-gold transition-colors">
+                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 0C5.385 0 0 5.385 0 12.031c0 2.115.55 4.17 1.595 5.986L.012 23.988l6.106-1.6c1.761.944 3.738 1.442 5.913 1.442 6.646 0 12.031-5.385 12.031-12.031S18.677 0 12.031 0zm0 21.674c-1.782 0-3.526-.479-5.056-1.386l-.362-.214-3.753.984.998-3.66-.235-.374a9.86 9.86 0 01-1.508-5.181c0-5.46 4.442-9.902 9.916-9.902 2.646 0 5.134 1.03 7.004 2.9A9.845 9.845 0 0121.947 12.03c0 5.46-4.442 9.902-9.916 9.902z"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h4 class="font-serif text-lg mb-4 text-white">Explore</h4>
+                <ul class="space-y-3 text-sm text-cream-dark/60 font-light">
+                    <li><a href="#" class="hover:text-gold transition-colors">New Arrivals</a></li>
+                    <li><a href="#" class="hover:text-gold transition-colors">Bestsellers</a></li>
+                    <li><a href="#" class="hover:text-gold transition-colors">Bridal Collection</a></li>
+                    <li><a href="#" class="hover:text-gold transition-colors">Gifting</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div>
+                <h4 class="font-serif text-lg mb-4 text-white">Contact</h4>
+                <ul class="space-y-3 text-sm text-cream-dark/60 font-light">
+                    <li>Email: hello@noorjewels.com</li>
+                    <li>WhatsApp: +91 98765 43210</li>
+                    <li>Mumbai, India</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-6 md:px-12 mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-xs text-cream-dark/40 font-light">
+            <p>&copy; 2026 Noor Jewels. All rights reserved.</p>
+            <p class="mt-2 md:mt-0">Made with ❤️ in India</p>
+        </div>
+    </footer>
+
+    <!-- Sticky WhatsApp Floating Button -->
+    <a href="https://wa.me/919876543210?text=Hi%20Noor%20Jewels,%20I%20would%20like%20to%20place%20an%20order." target="_blank" class="fixed bottom-6 right-6 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:scale-110 transition-transform duration-300 z-50 flex items-center justify-center animate-bounce" aria-label="Chat on WhatsApp">
+        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 0C5.385 0 0 5.385 0 12.031c0 2.115.55 4.17 1.595 5.986L.012 23.988l6.106-1.6c1.761.944 3.738 1.442 5.913 1.442 6.646 0 12.031-5.385 12.031-12.031S18.677 0 12.031 0zm0 21.674c-1.782 0-3.526-.479-5.056-1.386l-.362-.214-3.753.984.998-3.66-.235-.374a9.86 9.86 0 01-1.508-5.181c0-5.46 4.442-9.902 9.916-9.902 2.646 0 5.134 1.03 7.004 2.9A9.845 9.845 0 0121.947 12.03c0 5.46-4.442 9.902-9.916 9.902zm5.438-7.417c-.298-.15-1.766-.872-2.038-.973-.273-.101-.472-.15-.67.15-.199.299-.768.973-.941 1.173-.173.2-.347.225-.645.075-2.003-.974-3.411-2.222-4.229-3.645-.174-.3-.018-.463.13-.611.134-.134.298-.348.447-.522.15-.174.199-.299.298-.498.101-.2.05-.374-.025-.523-.075-.15-.67-1.618-.918-2.215-.242-.58-.488-.501-.67-.51-.173-.008-.372-.008-.57-.008s-.521.075-.794.374c-.273.299-1.042 1.021-1.042 2.49 0 1.47 1.067 2.891 1.216 3.09.149.2 2.106 3.214 5.105 4.511.713.308 1.268.492 1.701.629.715.227 1.365.195 1.88.118.577-.086 1.766-.722 2.014-1.421.248-.699.248-1.298.173-1.421-.074-.125-.272-.2-.57-.35z"/></svg>
+    </a>
+
+    <!-- Scripts -->
+    <script>
+        // WhatsApp Order Logic
+        function orderOnWhatsApp(productName) {
+            const phoneNumber = "919876543210"; // Replace with actual number
+            const message = encodeURIComponent(`Hi Noor Jewels, I saw the "${productName}" on your website and would love to place an order!`);
+            window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+        }
+
+        // Intersection Observer for scroll animations (Fade Up)
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-up').forEach((elem) => {
+                observer.observe(elem);
+            });
+
+            // Navbar scroll effect
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('shadow-md', 'bg-cream/95');
+                    navbar.classList.remove('bg-cream/90');
+                } else {
+                    navbar.classList.remove('shadow-md', 'bg-cream/95');
+                    navbar.classList.add('bg-cream/90');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
